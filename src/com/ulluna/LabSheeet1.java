@@ -14,6 +14,11 @@ public class LabSheeet1{
     String[] lows = {"", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"};
     String[] tens ={"", "", "twenty", "thirty", "fourty", "fifty", "sixty", "seventy", "eighty", "ninety"};
 
+    public static void main() {
+        LabSheeet1 ls = new LabSheeet1();
+        System.out.println(ls.verbaliseInt(1829344277));
+    }
+
     public String verbaliseInt (long x) {
         if(x==0)
             return "zero";
@@ -59,7 +64,6 @@ public class LabSheeet1{
 
         return s;
     }
-
 
     public int lengthOfInt(int x){
         int len=0;

@@ -1,6 +1,6 @@
 package com.ulluna;
 
-import java.util.*;
+import java.util.ArrayList;
 
 /**
  * Created by tomaszczernuszenko on 16/11/16.
@@ -78,8 +78,8 @@ public class WhackAmole {
 
 class Node {
 
-    private int[] tab;
     private final static int[][] impacts = {{1,4},{0,2,5},{1,6,3},{2,7},{0,5,8},{1,4,6,9},{5,10,7,2},{6,3,11},{4,9,12},{8,13,10,5},{9,14,6,11},{10,15,7},{13,8},{12,14,9},{13,10,15},{14,11}};
+    private int[] tab;
     private ArrayList<Integer> path;
 
     public Node(String values){

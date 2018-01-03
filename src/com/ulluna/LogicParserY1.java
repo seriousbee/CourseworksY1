@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * Created by tomaszczernuszenko on 10/01/17.
  */
-public class LogicParser {
+public class LogicParserY1 {
 
     static String[] texts = {"Invalid", "", "Atomic", "Negated", "Binary Connected", "Existential", "Universal"};
     static int numberOfNodes;
@@ -13,7 +13,7 @@ public class LogicParser {
     static int[] XYZ;
 
     public static void generateTestAndSolve(){
-        String input = LogicParser.generateTest();
+        String input = LogicParserY1.generateTest();
         System.out.println(input);
 
         String s = input.substring(0, input.indexOf(' '));
@@ -67,9 +67,7 @@ public class LogicParser {
     public static boolean validAtomic(String s){
         if(s.length()!=5 || s.charAt(0)!='X' || s.charAt(1)!='[' || s.charAt(4)!=']')
             return false;
-        if(!isXYZ(s.charAt(2)) || !isXYZ(s.charAt(3)))
-            return false;
-        return true;
+        return !(!isXYZ(s.charAt(2)) || !isXYZ(s.charAt(3)));
     }
 
     //returns 1 for atomic, 2 for negated, 3 for binary connected, 4 for existential, 5 for universal, -1 for invalid

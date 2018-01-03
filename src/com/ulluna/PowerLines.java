@@ -1,6 +1,8 @@
 package com.ulluna;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Created by tomaszczernuszenko on 24/10/16.
@@ -12,7 +14,7 @@ public class PowerLines {
     ArrayList<Connection> connections;
     int graphWeight;
 
-    public PowerLines(String s){  //input in format: [1, 2, 3, 4, 5, 6]
+    public PowerLines(String s) {  //input in format: "[1, 2, 3, 4, 5, 6]"
         int i=1, start;
         array = new ArrayList<>();
         while(i < s.length()-1){
@@ -203,8 +205,8 @@ class KruskallSubarray{
 }
 
 class KruskallArray{
-    private ArrayList<KruskallSubarray> subarrays;
     int weight;
+    private ArrayList<KruskallSubarray> subarrays;
 
     public KruskallArray(){
         subarrays = new ArrayList<>();

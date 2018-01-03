@@ -9,6 +9,12 @@ public class MazeSolving {
     int[][] graph;
     int[] distances;
     int[] sources;
+    int N = 10; //number of nodes
+    int[][] graph2D = new int[N][N]; //cost matrix for the graph
+    int[] distance = new int[N]; //initialise the whole array to MAX_INT - distance to all nodes is infinity
+
+
+
 
     public MazeSolving() {
         array = new Square[4][4];
@@ -20,11 +26,11 @@ public class MazeSolving {
         array[0][0] = new Square("0101");
         array[0][1] = new Square("0011");
         array[0][2] = new Square("0111");
-        array[0][3] = new Square("0010");
+        array[0][3] = new Square("0110");
         array[1][0] = new Square("1100");
         array[1][1] = new Square("0101");
         array[1][2] = new Square("1110");
-        array[1][3] = new Square("0100");
+        array[1][3] = new Square("1100");
         array[2][0] = new Square("1001");
         array[2][1] = new Square("1110");
         array[2][2] = new Square("1000");
@@ -52,6 +58,14 @@ public class MazeSolving {
                     graph[getIndex(i, j)][getIndex(i, j - 1)] = 1;
                 }
             }
+        }
+
+
+        for (int i = 0; i < graph.length; i++) {
+            for (int j = 0; j < graph[0].length; j++) {
+                System.out.print(graph[i][j]);
+            }
+            System.out.println();
         }
 
         for (int i = 0; i < distances.length; i++) {
@@ -138,8 +152,6 @@ public class MazeSolving {
         for (int i = 0; i < movesCounter; i++) {
             System.out.print(moves[i] + " ");
         }
-        System.out.println();
-
     }
 
     public int getIndex(int row, int column) {
@@ -147,14 +159,15 @@ public class MazeSolving {
     }
 
     public void BFS(int x) {
+        //Iterate through all elements in graph and dynamically find the shortest distance and path to a given point
+        //SIDE NOTE: I'm very curious why does this recursion even stop
         for (int i = 0; i < graph[x].length; i++) {
             if (graph[x][i] == 1) {
-
                 int cost = 1;
                 if (abs(sources[x] - i) != 2 && (sources[x] - i) % 4 != 0) //are all 3 points on the same line? If not - increase the cost
                     cost++;
 
-                if (distances[i] > distances[x] + cost) {
+                if (distances[i] > distances[x] + cost) { //if the new distance is shorter than the previously available one,
                     distances[i] = distances[x] + cost;
                     sources[i] = x;
                     BFS(i);
@@ -162,6 +175,22 @@ public class MazeSolving {
             }
         }
     }
+
+    //The function is called with dijkstra(startingNode);
+    //SIDE NOTE: I'm very curious why does this recursion even stop
+    public void dijkstra(int x) { //x - node whose connections are supposed to be expored
+        for (int i = 0; i < graph2D[x].length; i++) { //iterate through all connections of the node x
+            if (graph2D[x][i] > -1) { //if node x is connected to another node || -1 means there is no connection
+                if (distance[i] > distance[x] + graph2D[x][i]) { //if the new distance is shorter than the previously available one
+                    distances[i] = distance[x] + graph2D[x][i]; //update the new distance
+                    dijkstra(i); //call the algorithm for the newly updated node
+                }
+            }
+        }
+    }
+
+
+
 
     //0 - up, 1 - right, 2 - down, 3 - left
     public int displacementType(int source, int goal) {
